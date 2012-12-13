@@ -347,8 +347,8 @@ class LocalFilesystem
 		if ($file->isDirectory()) {
 			if ($recursive) {
 				/** @var File $file */
-				foreach ($file->ls() as $file) {
-					if (!$file->delete(true, $force)) {
+				foreach ($file->ls() as $subfile) {
+					if (!$subfile->delete(true, $force)) {
 						return false;
 					}
 				}
