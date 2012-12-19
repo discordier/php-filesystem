@@ -11,9 +11,23 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-spl_autoload_register(function($class) {
-    $path = __DIR__ . '/../src/' . implode('/', explode('\\', $class)) . '.php';
-    if (file_exists($path)) {
-        include($path);
-    }
-});
+namespace Filicious\Local;
+
+use Filicious\AbstractFilesystemConfig;
+
+/**
+ * A filesystem object
+ *
+ * @package filicious-core
+ * @author  Oliver Hoff <oliver@hofff.com>
+ */
+class LocalFilesystemConfig
+	extends AbstractFilesystemConfig
+{
+
+	public function __construct($path)
+	{
+		parent::__construct();
+		$this->setBasePath($path);
+	}
+}
