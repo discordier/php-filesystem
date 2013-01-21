@@ -11,24 +11,23 @@
  * @license http://www.gnu.org/licenses/lgpl-3.0.html LGPL
  */
 
-namespace Filicious\Iterator;
+namespace Filicious\Exception;
 
-use Filicious\File;
-use Filicious\FilesystemException;
-use Filicious\Internals\PathnameIterator;
-use Filicious\Internals\Util;
 
 /**
- * Filesystem iterator
+ * Filesystem exception
  *
  * @package filicious-core
  * @author  Tristan Lins <tristan.lins@bit3.de>
  */
-class FilesystemIterator
-	extends PathnameIterator
+class AdapterException
+	extends FilesystemException
 {
-	public function __construct(File $path, $flags = 0)
+	function __construct($message = '', $code = 0, \Exception $previous = null)
 	{
-		parent::__construct($path->internalPathname(), $flags, Util::buildFilters($path, $flags));
+		if ($code === 0) {
+			$code = static::OPERATION_EXCEPTION;
+		}
+		parent::__construct($message, $code, $previous);
 	}
 }
